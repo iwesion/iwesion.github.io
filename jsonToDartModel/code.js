@@ -470,7 +470,7 @@ $(function () {
     checkBoxBinding('usingJsonKeyCheckBox', false);
     checkBoxBinding('nullSafeCheckBox', true);
     checkBoxBinding('camelCheckBox', true);
-    checkBoxBinding('faultToleranceCheckBox', false);
+    checkBoxBinding('faultToleranceCheckBox', true);
     checkBoxBinding('forceStringCheckBox', false);
     checkBoxBinding('forceNumCheckBox', true);
     checkBoxBinding('origJsonCheckBox', false);
