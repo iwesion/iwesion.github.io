@@ -278,6 +278,7 @@ $(function () {
         let shouldConvertSnakeToCamel = $('#camelCheckBox').prop('checked');
         let shouldEnhanceFaultTolerance = $('#faultToleranceCheckBox').prop('checked');
         let shouldOridJson = $('#origJsonCheckBox').prop('checked');
+        let annotationCheckBox = $('#annotationCheckBox').prop("checked");
 
         let className = `${prefix}${uppercaseFirst(baseClass)}`;
         if (shouldConvertSnakeToCamel) {
@@ -285,8 +286,12 @@ $(function () {
         }
 
         lines.push(`class ${className} {`);
-        lines.push(`/*\r\n${JSON.stringify(jsonObj, null, 2)} \r\n*/\r\n`);
-
+        console.log(shouldConvertSnakeToCamel);
+        if (annotationCheckBox) {
+          var s = JSON.stringify(jsonObj, null, 4)
+          lines.push(`  /*\r\n    ${s.substring(0,s.length - 1)}    }\r\n  */\r\n`);
+        }
+        
         constructorLines.push(`  ${className}({\n`);
         fromJsonLines.push(`  ${className}.fromJson(Map<String, dynamic> json) {\n`);
         if (shouldOridJson) {
@@ -451,6 +456,7 @@ $(function () {
     jsonEditorBinding();
 
     function checkBoxBinding(checkBoxID, checked) {
+      console.log(checkBoxID)
       let defaultValue = checked ? '1' : '0';
       let selector = '#' + checkBoxID;
       let strFromCookie = $.cookie(checkBoxID);
@@ -474,6 +480,7 @@ $(function () {
     checkBoxBinding('forceStringCheckBox', false);
     checkBoxBinding('forceNumCheckBox', true);
     checkBoxBinding('origJsonCheckBox', false);
+    checkBoxBinding('annotationCheckBox',true);
 
     $('#usingJsonKeyCheckBox').on('change', function () {
       $('#jsonKeyPrivateCheckBox').prop('disabled', !(this.checked));
