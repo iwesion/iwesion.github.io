@@ -11,42 +11,41 @@ $(function () {
     }
     const jsonEditorCachekey = 'jsonEditor';
 
-    let resultDartCode = '';
-
-    let jsonTestCase = {
-      "some_snake_case_prop": "",
-      "anInt": 1,
-      "aDouble": 2.3,
-      "aString": "hello",
-      "aBool": false,
-      "anObj": {
-        "name": "x",
-        "age": 18.1
-      },
-      "anObjList": [
-        {
-          "name": "y"
-        }
-      ],
-      "aStrList": [
-        "something"
-      ],
-      "multidimensional": [
-        [
-          [
-            {
-              "name": "y"
-            }
-          ]
-        ]
-      ]
-    };
+    // let jsonTestCase = {
+    //   "some_snake_case_prop": "",
+    //   "anInt": 1,
+    //   "aDouble": 2.3,
+    //   "aString": "hello",
+    //   "aBool": false,
+    //   "anObj": {
+    //     "name": "x",
+    //     "age": 18.1
+    //   },
+    //   "anObjList": [
+    //     {
+    //       "name": "y"
+    //     }
+    //   ],
+    //   "aStrList": [
+    //     "something"
+    //   ],
+    //   "multidimensional": [
+    //     [
+    //       [
+    //         {
+    //           "name": "y"
+    //         }
+    //       ]
+    //     ]
+    //   ]
+    // };
 
     // create the editor
     const container = document.getElementById("origJsonContainer")
     const options = {
       "mode": "code",
       onChangeText: (str) => {
+        console.log(str);
         $.cookie(jsonEditorCachekey, str);
         generate();
       },
@@ -445,15 +444,16 @@ $(function () {
     //textFieldBinding('origJsonTextarea', jsonTestCase);
     textFieldBinding('classNameTextField', 'SomeRootEntity');
 
-    function jsonEditorBinding(tfID, defaultValue) {
-      let str = $.cookie(jsonEditorCachekey);
-      if (str && str.length) {
-        editor.setText(str);
-      } else {
-        editor.set(jsonTestCase);
-      }
-    }
-    jsonEditorBinding();
+    // function jsonEditorBinding(tfID, defaultValue) {
+    //   let str = $.cookie(jsonEditorCachekey);
+    //   // if (str && str.length) {
+    //   //   editor.setText(str);
+    //   // } else {
+    //   //   editor.set(jsonTestCase);
+    //   // }
+    //   editor.setText(str);
+    // }
+    // jsonEditorBinding();
 
     function checkBoxBinding(checkBoxID, checked) {
       console.log(checkBoxID)
@@ -478,7 +478,7 @@ $(function () {
     checkBoxBinding('camelCheckBox', true);
     checkBoxBinding('faultToleranceCheckBox', true);
     checkBoxBinding('forceStringCheckBox', false);
-    checkBoxBinding('forceNumCheckBox', true);
+    checkBoxBinding('forceNumCheckBox', false);
     checkBoxBinding('origJsonCheckBox', false);
     checkBoxBinding('annotationCheckBox',true);
 
